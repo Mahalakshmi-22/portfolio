@@ -367,6 +367,9 @@ body{
         margin-left: 10px;
         height: 50px;
     }
+    .navbar-collapse ul{
+     font-size: 23px;   
+    }
     #arr{
         margin-top: 90px;
         padding-top: 0px;
@@ -406,7 +409,7 @@ body{
        font-size: 24px;
     }
     .about-me-content{
-        padding-left: 50px;
+        padding-left: 17px;
     }
     .about-content{
         display: flex;
