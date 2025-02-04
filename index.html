@@ -5,19 +5,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-  </title>
+  <!-- <title>Your Portfolio</title> -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="./style.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
 
 <body>
   <section class="img-girl">
-    
     <nav class="navbar navbar-expand-lg navbar-light bg-light nav-section">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="./assets/logo.png" alt="" class="logo-img"></a>
@@ -171,29 +169,25 @@
   
 
   <section>
-    <div id="contact"class="contact-page">
+    <div id="contact" class="contact-page">
       <div class="contact-left">
         <h1>Contact</h1>
-        <form>
+        <form id="emailForm">
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Name</label>
-            <input type="text" class="form-control">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" required>
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Enter your mail</label>
-            <input type="email" class="form-control">
+            <label for="email" class="form-label">Enter your mail</label>
+            <input type="email" id="email" class="form-control" required>
           </div>
-
-          <textarea class="form-control" rows="8">Send message</textarea>
-
+          <textarea id="message" class="form-control" rows="8" placeholder="Send message" required></textarea>
           <button type="submit" class="btn btn-primary mt-5">Send a message</button>
         </form>
-
       </div>
       <div class="contact-right">
         <img src="./assets/contact-removebg-preview.png" alt="">
       </div>
-
     </div>
   </section>
   
@@ -215,7 +209,32 @@
 
 
   <script>
+    (function(){
+        emailjs.init("K5d5_eRw5hXrJtDF6");
+    })();
 
+    // console.log(EMAILJS_TEMPLATE_ID,EMAILJS_USER_ID,"llllllllllllllllllllllllll");
+    
+
+    document.getElementById("emailForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            message: document.getElementById("message").value,
+        };
+
+        emailjs.send("service_973jisv", "template_z91r0ic", formData)
+            .then(response => {
+                alert("Email sent successfully!");
+                document.getElementById("emailForm").reset(); 
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Failed to send email. Please try again.");
+            });
+    });
   </script>
 </body>
 
